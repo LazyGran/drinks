@@ -25,17 +25,79 @@
         color: #c8b08b; 
         background-color: #272115; 
       }
+      main
+      {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(2vw, 26vw));
+        gap: 15px;
+        padding: 20px;
+        margin-left: -4vw;
+        justify-content: center;
+      }
+      .drink
+      {
+        cursor: pointer;  
+        text-align: center;
+        transition: transform 0.2s ease;
+      }
+      .drink:hover
+      {
+        transform: scale(1.05);
+      }
+      .drink img
+      {
+        min-height: 50px;
+        height: 30vw;
+        max-height: 750px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        display: block;
+      }
+      .drink p
+      {
+        margin: 10px 0;
+        margin-left: 4vw;
+        font-size: 1rem;
+        color: #c8b08b;
+      }
     </style>
   </head>
   <body>
     <header>
     </header>
-    <main>
-      Test text
-    </main>
+    <main id="grid"></main>
   <footer>
   </footer>
   <script>
+    const drinks = [
+      { name: "test1", img: "resources/collins.png", type: "collins", ingredients: ["1", "2", "3"] },
+      { name: "test2", img: "resources/collins.png", type: "collins", ingredients: ["1", "2", "3"] },
+      { name: "test3", img: "resources/collins.png", type: "collins", ingredients: ["1", "2", "3"] },
+      { name: "test4", img: "resources/martini.png", type: "martini", ingredients: ["1", "2", "3"] },
+      { name: "test5", img: "resources/collins.png", type: "collins", ingredients: ["1", "2", "3"] },
+      { name: "test6", img: "resources/martini.png", type: "martini", ingredients: ["1", "2", "3"] },
+    ]
+
+    const grid = document.getElementById("grid")
+
+    drinks.forEach(drink => 
+    {
+      const img     = document.createElement("img")
+      const caption = document.createElement("p")
+      const card    = document.createElement("div")
+
+      img.src = drink.img
+      img.alt = drink.name
+
+      caption.textContent = drink.name
+
+      card.className = "drink"
+      card.appendChild(img)
+      card.appendChild(caption)
+      card.addEventListener("click", () => { console.log(`Clicked ${drink.name}`)})
+
+      grid.appendChild(card)
+    })
 
   </script>
   </body>
